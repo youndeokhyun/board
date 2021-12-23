@@ -1,0 +1,158 @@
+body{
+    font-family: 'Gowun Dodum', sans-serif;
+    font-size:16px;
+    color:#333;
+}
+a,a:link,a.page-link{
+  color:#333;
+}
+a:hover,a.page-link:hover{
+  color:#666;
+}
+.loading{
+width:100%;
+height:100%;
+position:fixed;
+z-index:100;
+top:0;
+left:0;
+background-color:rgba(0,0,0,0.3);
+display:flex;
+justify-content: center;
+align-items: center;
+}
+.spinner-border{
+width:100px;
+height:100px;
+}
+h1{
+font-weight:bold;
+}
+
+/** LIST **/
+table.table{
+border-bottom:2px solid #dee2e6;
+}
+th{ text-align:center;}
+.page-item.active .page-link {
+    background-color: #666;
+    border-color: #666;
+}
+.pc-hidden{
+    display:none;
+}
+
+/** VIEW **/
+.view-title{
+    list-style-type:none;
+    width:100%;
+    margin:0;
+    padding:0;
+    border-top:2px solid #333;
+}
+.view-title li{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    border-bottom:1px solid #ccc;
+}
+
+.view-title label{
+    display:inline-block;
+    margin:0;
+    padding:15px;
+    width:17%;
+    margin-right:15px;
+    background:#ededed;
+    font-weight:bold;
+    color:#333;
+}
+li.content{
+    padding:20px;
+}
+
+ul.comment-list{
+    border-top:1px solid #ccc;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+ul.comment-list li{
+   border-bottom:1px solid #ccc;
+   padding:20px 15px;    
+}
+.bigfont{
+    font-size:30px;
+    font-weight:bold;
+    color:#999;
+}
+.cdel-edit{
+    width:100%;
+    height:100%;
+}
+
+/* write */
+.write-title{
+    list-style-type:none;
+    width:100%;
+    margin:0;
+    padding:0;
+    border-top:2px solid #333;
+}
+.write-title li{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    border-bottom:1px solid #ccc;
+}
+.write-title .label{
+    background:#ededed;
+    font-size:18px;
+    font-weight:bold;
+    line-height:62px;
+    margin-bottom:0;
+}
+.btn-area .btn{
+    margin-left:15px;
+    margin-right:15px;
+    letter-spacing:15px;
+    text-align:center;
+    padding-left:30px;
+    font-weight:bold;
+}
+@media screen and (max-width: 768px) {
+   
+   .btn-write{
+       display:block;
+       width:100%;
+   }
+   .mobile-hidden{
+       display:none;
+   }
+   .pc-hidden{
+     display:block;
+   }
+
+   /** LIST **/
+
+   td a{
+       display:block;
+   }
+   .icon{
+       width:50px;
+       height:50px;
+       background-color:chocolate;
+       color:#fff;
+       margin:8px auto;
+       border-radius:50%;
+       text-align:center;
+       line-height:43px;
+       font-size:35px;
+   }
+   .utxt{
+       text-align:center;
+       font-size:12px;
+   }
+
+   /** view **/
+}
