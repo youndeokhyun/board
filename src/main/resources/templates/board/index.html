@@ -1,16 +1,68 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <!-- header -->
-  <div th:insert="commom/header.html" id="header"></div>
 
-   <a th:href="@{/write}"> 글쓰기 </a>
+<!-- header -->
+<div th:insert="commom/header.html" id="header"></div>
+<div class="container mb-5">
+    <table class="table table-hover">
+        <colgroup class="mobile-hidden">
+            <col width="55">
+            <col>
+            <col width="120">
+            <col width="120">
+            <col width="80">
+        </colgroup>
+        <thead>
+        <tr>
+            <th class="mobile-hidden">번호</th>
+            <th class="mobile-hidden">제목</th>
+            <th class="mobile-hidden">글쓴이</th>
+            <th class="mobile-hidden">날짜</th>
+            <th class="mobile-hidden">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- loop -->
+        <tr>
+            <td class="mobile-hidden">1</td>
+            <td>
+                <a href="view.html" class="icon pc-hidden"><i class="fas fa-user-tie"></i></a>
+                <a href="view.html" class="utxt pc-hidden">홍길동 [2021.08.12]</a>
+                <a href="view.html">제목입니다.</a>
+            </td>
+            <td class="mobile-hidden"><a href="view.html">홍길동</a></td>
+            <td class="mobile-hidden">2021.08.12</td>
+            <td class="mobile-hidden">265</td>
+        </tr>
+        <!-- /loop -->
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-12 col-md-8 my-3">
+            <form>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="button"
+                                class="btn btn-outline-secondary dropdown-toggle"
+                                data-toggle="dropdown">제목+내용</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="view.html">이름</a>
+                            <a class="dropdown-item" href="view.html">제목</a>
+                            <a class="dropdown-item" href="view.html">내용</a>
+                            <a class="dropdown-item" href="view.html">제목+내용</a>
+                        </div>
+                    </div>
+                        <input type="text" class="form-control user-form" placeholder="검색">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="button">검색</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-4 my-3 text-right">
+            <a th:href="@{/write}" type="button" class="btn btn-dark btn-write px-4"> 쓰기 </a>
+        </div>
+    </div>
+</div>
 
-   <!-- footter -->
-  <div th:insert="commom/footter.html" id="footter"></div>
-</body>
-</html>
+
+<!-- footter -->
+<div th:insert="commom/footter.html" id="footter"></div>
