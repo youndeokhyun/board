@@ -1,37 +1,45 @@
-
+<div  th:insert="commom/header.html" id="header" ></div>
+<body xmlns:th="http://www.thymeleaf.org">
+<h1 class="text-center"> spring boot 게시판 </h1>
 <!-- header -->
-<div th:insert="commom/header.html" id="header"></div>
 <div class="container mb-5">
     <table class="table table-hover">
-        <colgroup class="mobile-hidden">
+        <thead>
+          <colgroup class="mobile-hidden">
             <col width="55">
             <col>
             <col width="120">
             <col width="120">
             <col width="80">
-        </colgroup>
-        <thead>
+          </colgroup>
+        </thead>
         <tr>
-            <th class="mobile-hidden">번호</th>
+            <th class="mobile-hidden">순번</th>
             <th class="mobile-hidden">제목</th>
-            <th class="mobile-hidden">글쓴이</th>
-            <th class="mobile-hidden">날짜</th>
+            <th class="mobile-hidden">작성자</th>
+            <th class="mobile-hidden">작성일</th>
             <th class="mobile-hidden">조회수</th>
         </tr>
-        </thead>
         <tbody>
         <!-- loop -->
-        <tr>
-            <td class="mobile-hidden">1</td>
+        <tr th:each="list:${boardList}">
             <td>
-                <a href="view.html" class="icon pc-hidden"><i class="fas fa-user-tie"></i></a>
-                <a href="view.html" class="utxt pc-hidden">홍길동 [2021.08.12]</a>
-                <a href="view.html">제목입니다.</a>
+                <span th:text="${list.id}"></span>
             </td>
-            <td class="mobile-hidden"><a href="view.html">홍길동</a></td>
-            <td class="mobile-hidden">2021.08.12</td>
-            <td class="mobile-hidden">265</td>
+            <td>
+                <a th:href="@{'/view/' + ${list.id}}">
+                    <span th:text="${list.title}"></span>
+                </a>
+            </td>
+            <td>
+                <span>작성자</span>
+            </td>
+            <td>
+                <span th:text="${#temporals.format(list.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+            </td>
+            <td >카운트</td>
         </tr>
+
         <!-- /loop -->
         </tbody>
     </table>
@@ -62,7 +70,9 @@
         </div>
     </div>
 </div>
-
+<div class="loading">
+    <div class="spinner-border text-primary"></div>
+</div>
 
 <!-- footter -->
-<div th:insert="commom/footter.html" id="footter"></div>
+<div th:insert="commom/footter.html" id="footer"></div>

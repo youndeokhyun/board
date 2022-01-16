@@ -20,13 +20,12 @@ public class BoardDTO {
 
 
     public BoardEntity toEntity(){
-        BoardEntity boardEntity = BoardEntity.builder()
+        return BoardEntity.builder()
                 .id(id)
                 .title(title)
                 .content(content)
                 .count(count)
                 .build();
-        return boardEntity;
     }
 
     @Builder

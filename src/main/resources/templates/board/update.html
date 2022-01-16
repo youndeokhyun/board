@@ -1,0 +1,29 @@
+<div th:insert="commom/header.html" id="header"></div>
+<body xmlns:th="http://www.thymeleaf.org">
+<div class="container mb-5">
+    <form id="writeForm" th:action="@{'/write/edit/' +  ${boardDTO.id}}"  method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="id" th:value="${boardDTO.id}"/>
+        <ul class="write-title">
+            <li class="row">
+                    <label>
+                      제목 : <input type="text" class="form-control" name="title" th:value="${boardDTO.title}" placeholder="제목">
+                    </label>
+            </li>
+            <li class="content py-4">
+                <label>
+                    <textarea  name="content" class="summernote form-control" th:text="${boardDTO.content}"  placeholder="내용"></textarea>
+                </label>
+            </li>
+        </ul>
+        <div class="btn-area px-4 py-4 text-center">
+            <button type="reset" class="btn btn-danger"><a th:href="@{'/list'}">취소</a></button>
+            <button type="submit" class="btn btn-dark">수정</button>
+        </div>
+    </form>
+</div>
+<div class="loading">
+    <div class="spinner-border text-primary"></div>
+</div>
+<div th:insert="commom/footter.html" id="footer"></div>
+</body>
