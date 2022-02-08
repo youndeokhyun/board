@@ -4,10 +4,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,6 +26,7 @@ public class BoardEntity extends TimeEntity{
     private String content;
 
     @Column(length = 10)
+    @ColumnDefault("0") //default 0
     private int count;
 
 

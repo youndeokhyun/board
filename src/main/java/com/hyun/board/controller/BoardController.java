@@ -22,7 +22,7 @@ public class BoardController {
         List<BoardDTO> boardList = boardService.getBoardlist();
 
         model.addAttribute("boardList" , boardList);
-        return "board/index";
+        return "board/list";
     }
     // 글쓰기 페이지
     @GetMapping("/write")
@@ -35,7 +35,7 @@ public class BoardController {
     public String write(BoardDTO boardDTO){
         boardService.savaWrite(boardDTO);
 
-        return "redirect:/list";
+        return "redirect:/board/list";
     }
 
     //상세 페이지
@@ -67,6 +67,15 @@ public class BoardController {
     public String delete(@PathVariable("no") Long no){
         boardService.deleteWrite(no);
         return "redirect:/list";
+    }
+
+    //페이징
+    @GetMapping("/list/search")
+    public String search(@RequestParam(value="keyword") String keyword , Model model){
+        List<BoardDTO> boardDTOList = boardService.searchContent(keyword);
+
+        model.addAttribute("boardList" , boardDTOList );
+        return "/board/list";
     }
 
 }

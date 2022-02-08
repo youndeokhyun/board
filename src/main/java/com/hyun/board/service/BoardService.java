@@ -57,4 +57,29 @@ public class BoardService {
     public void deleteWrite(Long id){
         boardRepository.deleteById(id);
     }
+
+    //Repository에서 검색 결과를 받아와 비즈니스 로직을 실행하는 함수입니다.
+    //controller <--> Setvice 간에는 Dto 객채로 전달하는것이 좋다
+    @Transactional
+    public List<BoardDTO> searchContent (String keyword){
+
+        List<BoardEntity> boardEntities = boardRepository.findByTitleContaining(keyword);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+
+        if(boardEntities.isEmpty()) return boardDTOList;
+
+        for(BoardEntity boardEntity : boardEntities){
+            boardDTOList.add(this.convertEntityToDto(boardEntity));
+        }
+        return boardDTOList;
+    }
+
+    private BoardDTO convertEntityToDto(BoardEntity boardEntity){
+        return  BoardDTO.builder()
+                .id(boardEntity.getId())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .createdDate(boardEntity.getCreatedDate())
+                .build();
+    }
 }
