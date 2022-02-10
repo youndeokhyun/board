@@ -59,7 +59,9 @@
             </form>
         </div>
         <div class="page">
-
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+                <a th:href="@{'/list/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+            </span>
         </div>
         <div class="col-12 col-md-4 my-3 text-right">
             <a th:href="@{/write}" type="button" class="btn btn-dark btn-write px-4"> 쓰기 </a>

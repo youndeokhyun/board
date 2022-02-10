@@ -18,12 +18,17 @@ public class BoardController {
 
     // 리스트 페이지
     @GetMapping("/list")
-    public String list(Model model){
-        List<BoardDTO> boardList = boardService.getBoardlist();
+    public String list(Model model , @RequestParam(value="page" , defaultValue="1") Integer pageNum ){
+        //list 페이지에 글 출력
+        List<BoardDTO> boardList = boardService.getWriteList(pageNum);
+        Integer[] pageList = boardService.getPageList(pageNum);
 
         model.addAttribute("boardList" , boardList);
+        model.addAttribute("pageList" , pageList);
+
         return "board/list";
     }
+
     // 글쓰기 페이지
     @GetMapping("/write")
     public String write(){
