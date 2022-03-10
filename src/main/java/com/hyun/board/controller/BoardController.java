@@ -40,7 +40,7 @@ public class BoardController {
     public String write(BoardDTO boardDTO){
         boardService.savaWrite(boardDTO);
 
-        return "redirect:/board/list";
+        return "redirect:/list";
     }
 
     //상세 페이지

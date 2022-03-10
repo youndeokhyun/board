@@ -16,7 +16,6 @@
         <tr>
             <th class="mobile-hidden">순번</th>
             <th class="mobile-hidden">제목</th>
-            <th class="mobile-hidden">작성자</th>
             <th class="mobile-hidden">작성일</th>
             <th class="mobile-hidden">조회수</th>
         </tr>
@@ -31,9 +30,7 @@
                     <span th:text="${list.title}"></span>
                 </a>
             </td>
-            <td>
-                <span>작성자</span>
-            </td>
+
             <td>
                 <span th:text="${#temporals.format(list.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
             </td>
@@ -58,14 +55,14 @@
                 </div>
             </form>
         </div>
-        <div class="page">
+        <div class="col-12 col-md-2 my-3 text-right">
+            <a th:href="@{/write}" type="button" class="btn btn-dark btn-write px-4"> 쓰기 </a>
+        </div>
+    </div>
+    <div class="page text-center">
             <span th:each="pageNum : ${pageList}" th:inline="text">
                 <a th:href="@{'/list/?page=' + ${pageNum}}">[[${pageNum}]]</a>
             </span>
-        </div>
-        <div class="col-12 col-md-4 my-3 text-right">
-            <a th:href="@{/write}" type="button" class="btn btn-dark btn-write px-4"> 쓰기 </a>
-        </div>
     </div>
 </div>
 <div class="loading">

@@ -131,9 +131,8 @@ public class BoardService {
         // 총 게시글 기준으로 계산한 마지막 블럭 번호 계산(올림으로)
         Integer totalLastPageNum  = (int)(Math.ceil(writeTotalCount/PAGE_WRITE_COUNT));
 
-        curPageNum = (curPageNum <= 3) ? 1 : curPageNum - 2;
+        curPageNum = (curPageNum <= 2) ? 1 : curPageNum - 1;
 
-  //        Integer blockStartPageNum= (curPageNum <= BLOCK_NUM_COUNT/2) ? 1 : curPageNum - BLOCK_NUM_COUNT/2;
 
         //현제 페이지를 기준으로 블럭의 마지막 페이지 번호 계산
         Integer blockLastPageNum = (totalLastPageNum > curPageNum + BLOCK_NUM_COUNT-1)
