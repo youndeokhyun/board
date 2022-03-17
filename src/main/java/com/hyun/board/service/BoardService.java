@@ -24,7 +24,6 @@ public class BoardService {
     public Long savaWrite(BoardDTO boardDTO){
         return boardRepository.save(boardDTO.toEntity()).getId();
     }
-    //게씨판 리스트 뿌려주는 메소드
 
 
     //수정시 원본? 데이터 가져오는 메소드
@@ -47,13 +46,20 @@ public class BoardService {
     }
 
 
-    //글 목록
+    //list 출력
     @Transactional
-    public List<BoardDTO> getBoardlist(){
-        List<BoardEntity> boardEntityList = boardRepository.findAll();
+    public List<BoardDTO> getBoardlist(Integer pageNum){
+         /*Pageable 인터페이스를 구현한 클래스(PageRequest.of())를 전달하여 페이징
+        PageRequest.of("pageNum -1 =현재 페이지 번호 - 1"을 계산한 값(실제 페이지 번호와 SQL 조회시 사용되는 limit은 다르기 때문)
+                        PAGE_WRITE_COUNT =  위에 변수 대로 몇개의 글을 가져올것인가
+                        Sort.by(Sort.Direction.ASC, "createDate") = 정렬 방식 createDate 로 설정하여 ASC 오른 차순으로 정렬
+                        */
+        Page<BoardEntity> page =boardRepository.findAll(PageRequest.of(pageNum -1 , PAGE_WRITE_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
+        List<BoardEntity> boardEntities = page.getContent(); // 전체 게시글수
         List<BoardDTO> boardDTOList = new ArrayList<>();
 
-        for( BoardEntity boardEntity : boardEntityList){
+
+        for( BoardEntity boardEntity : boardEntities){
             BoardDTO boardDTO = BoardDTO.builder()
                     .id(boardEntity.getId())
                     .title(boardEntity.getTitle())
@@ -65,6 +71,22 @@ public class BoardService {
         return boardDTOList;
     }
 
+    /*
+    @Transactional
+    public List<BoardDTO> getWriteList(Integer pageNum){
+
+        Page<BoardEntity> page =boardRepository.findAll(PageRequest.of(pageNum -1 , PAGE_WRITE_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
+
+        List<BoardEntity> boardEntities = page.getContent(); // 전체 게시글수
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        // boardEntities 총 게시글 수만큼 변수명 boardEntity 담아 boardDTOList 새로운 ArrayList<>() 에 추가
+        for(BoardEntity boardEntity : boardEntities){
+            boardDTOList.add(this.convertEntityToDto(boardEntity));
+
+        }
+        return boardDTOList;
+    }
+     */
 
     //Repository에서 검색 결과를 받아와 비즈니스 로직을 실행하는 함수입니다.
     //controller <--> Setvice 간에는 Dto 객채로 전달하는것이 좋다
@@ -82,6 +104,8 @@ public class BoardService {
         }
         return boardDTOList;
     }
+
+
      // Entity를 Dto로 변환하는 작업 중복처리 개선
     private BoardDTO convertEntityToDto(BoardEntity boardEntity){
         return  BoardDTO.builder()
@@ -96,31 +120,13 @@ public class BoardService {
     private static final int BLOCK_NUM_COUNT = 5;   // 한 블럭당 존재하는 페이지 번호
     private static final int PAGE_WRITE_COUNT = 10;  // 한 페이지당 존재하는 게시글수
 
-    //list 출력
-    @Transactional
-    public List<BoardDTO> getWriteList(Integer pageNum){
-        /*Pageable 인터페이스를 구현한 클래스(PageRequest.of())를 전달하여 페이징
-        PageRequest.of("pageNum -1 =현재 페이지 번호 - 1"을 계산한 값(실제 페이지 번호와 SQL 조회시 사용되는 limit은 다르기 때문)
-                        PAGE_WRITE_COUNT =  위에 변수 대로 몇개의 글을 가져올것인가
-                        Sort.by(Sort.Direction.ASC, "createDate") = 정렬 방식 createDate 로 설정하여 ASC 오른 차순으로 정렬
-                        */
-        Page<BoardEntity> page =boardRepository.findAll(PageRequest.of(pageNum -1 , PAGE_WRITE_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
 
-        List<BoardEntity> boardEntities = page.getContent(); // 전체 게시글수
-        List<BoardDTO> boardDTOList = new ArrayList<>();
-
-        // boardEntities 총 게시글 수만큼 변수명 boardEntity 담아 boardDTOList 새로운 ArrayList<>() 에 추가
-        for(BoardEntity boardEntity : boardEntities){
-            boardDTOList.add(this.convertEntityToDto(boardEntity));
-
-        }
-        return boardDTOList;
-    }
     //전체 게시글 개수를 가져온다
     @Transactional
     public Long getBoardCount(){
         return boardRepository.count();
     }
+
     // 페이징 로직
     public Integer[] getPageList(Integer curPageNum){
         Integer[] pageList  = new Integer[BLOCK_NUM_COUNT];
@@ -143,5 +149,10 @@ public class BoardService {
         }
 
         return pageList;
+    }
+
+    @Transactional
+    public int updateCount(Long id){
+        return boardRepository.updateCount(id);
     }
 }

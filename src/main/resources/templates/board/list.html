@@ -30,13 +30,11 @@
                     <span th:text="${list.title}"></span>
                 </a>
             </td>
-
             <td>
                 <span th:text="${#temporals.format(list.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
             </td>
             <td th:text="${list.count}"></td>
         </tr>
-
         <!-- /loop -->
         </tbody>
     </table>

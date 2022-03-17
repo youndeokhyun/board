@@ -5,7 +5,7 @@
 
      <li class="text-center view-title" th:text="${boardDto.title}"></li>
      <p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </p>
-     <p th:text="${boardDto.content}"></p>
+     <p th:utext="${boardDto.content}"></p>
       <!-- 수정/삭제 -->
     </td>
     <div>
